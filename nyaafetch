@@ -1,0 +1,92 @@
+#!/bin/bash
+#                          __      _       _
+# _ __  _   _  __ _  __ _ / _| ___| |_ ___| |__
+#| '_ \| | | |/ _` |/ _` | |_ / _ \ __/ __| '_ \
+#| | | | |_| | (_| | (_| |  _|  __/ || (__| | | |
+#|_| |_|\__, |\__,_|\__,_|_|  \___|\__\___|_| |_|
+#       |___/
+#
+# By Ayush Yadav (https://github.com/clawbhaiya)
+
+distro_name=""
+wm_name=""
+user_name=""
+
+config="$HOME"/.config/nyaafetch/config.sh
+
+find_distro () {
+    source /etc/os-release
+    case "$NAME" in 
+        "Arch Linux")
+            distro_name="UwU Linux"
+            ;;
+		"Artix Linux")
+			distro_name="OwO Linux"
+			;;
+		*)
+            distro_name="$NAME"
+    esac
+}
+
+find_wm () {
+    wm_name=$(wmctrl -m | grep Name | awk '{print $2}')
+}
+
+find_user () {
+	user_name="$(whoami)"
+	if [ "$user_name" = "ayush" ] ; then
+		user_name="yay its mah dev dessu!"
+	elif [ "$user_name" = "inu" ] ; then
+		user_name="ayy nyaa u der?"
+	fi
+}
+
+parse_config () {
+	if [ ! -f "$config" ] ; then
+		find_distro
+		find_wm
+		find_user
+		touch "$HOME"/.config/nyaafetch/config.sh
+		echo "wm_name=\"$wm_name\"" >> "$config"
+		echo "user_name=\"$user_name\"" >> "$config"
+		echo "distro_name=\"$distro_name\"" >> "$config"
+	fi
+	
+	source "$config"
+
+	if [ "$wm_name" = "" ] ; then
+		find_wm
+	fi
+	if [ "$user_name" = "" ] ; then
+		find_user
+	fi
+	if [ "$distro_name" = "" ] ; then
+		find_distro
+	fi
+}
+
+print_colors () {
+    printf "   \e[30m  \e[31m  \e[32m  \e[33m  \e[34m  \e[35m  \e[36m  \e[37m\n"
+}
+
+if [ "$1" = "config" ] ; then
+	echo Reconfiguring Nyaafetch...
+	rm "$config"
+	parse_config
+	echo Done!
+	exit 0
+fi
+
+parse_config
+
+printf "\e[37;1m  /\\_/\\  (    \e[32;1m  %s\n\e[0m" "$distro_name"
+printf "\e[37;1m ( ^.^ ) )    \e[32;1m  %s\n\e[0m" "$wm_name"
+printf "\e[37;1m  \\   / (     \e[32;1m  %s\e[0m\n" "$TERM"
+printf "\e[37;1m ( | | )      \e[32;1m  %s\n" "$user_name"
+printf "\e[37;1m(__d b__)\n\e[0m"
+
+print_colors
+
+unset distro_name
+unset wm_name
+unset user_name
