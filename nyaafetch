@@ -46,6 +46,9 @@ parse_config () {
 		find_distro
 		find_wm
 		find_user
+        if [ ! -d "$HOME"/.config/nyaafetch ] ; then
+            mkdir -p "$HOME"/.config/nyaafetch
+        fi
 		touch "$HOME"/.config/nyaafetch/config.sh
 		echo "wm_name=\"$wm_name\"" >> "$config"
 		echo "user_name=\"$user_name\"" >> "$config"
