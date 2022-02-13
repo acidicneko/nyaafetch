@@ -1,0 +1,7 @@
+start install_nyaa
+
+print Installing Nyaafetch to /usr/bin/
+nyaafetch=/usr/bin/nyaafetch
+endl
+
+stop install_nyaa
