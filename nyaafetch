@@ -82,14 +82,19 @@ fi
 
 parse_config
 
-printf "\e[37;1m  /\\_/\\  (    \e[32;1m  %s\n\e[0m" "$distro_name"
-printf "\e[37;1m ( ^.^ ) )    \e[32;1m  %s\n\e[0m" "$wm_name"
-printf "\e[37;1m  \\   / (     \e[32;1m  %s\e[0m\n" "$TERM"
-printf "\e[37;1m ( | | )      \e[32;1m  %s\n" "$user_name"
-printf "\e[37;1m(__d b__)\n\e[0m"
+#printf "\e[37;1m  /\\_/\\  (    \e[32;1m  %s\n\e[0m" "$distro_name"
+#printf "\e[37;1m ( ^.^ ) )    \e[32;1m  %s\n\e[0m" "$wm_name"
+#printf "\e[37;1m  \\   / (     \e[32;1m  %s\e[0m\n" "$TERM"
+#printf "\e[37;1m ( | | )      \e[32;1m  %s\n" "$user_name"
+#printf "\e[37;1m(__d b__)\n\e[0m"
+
+printf "       へ      ♡   ╱|、		\e[32;1m  %s\n\e[0m" "$distro_name"
+printf "     ૮  - ՛)      (\`  -7	\e[32;1m  %s\n\e[0m" "$wm_name"
+printf "      / ⁻ ៸|      |、⁻〵	\e[32;1m  %s\e[0m\n" "$TERM"
+printf " 乀 \(ˍ,ل ل       じしˍ,)ノ	\e[32;1m  %s\n\n" "$user_name"
 
 print_colors
 
-unset distro_name
+unset distro_name 
 unset wm_name
 unset user_name
