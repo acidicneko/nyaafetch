@@ -29,7 +29,11 @@ find_distro () {
 }
 
 find_wm () {
-    wm_name=$(wmctrl -m | grep Name | awk '{print $2}')
+    if [ ! command -v wmctrl &> /dev/null ] ; then
+        wm_name="N/A"
+    else
+        wm_name=$(wmctrl -m | grep Name | awk '{print $2}')
+    fi
 }
 
 find_user () {
